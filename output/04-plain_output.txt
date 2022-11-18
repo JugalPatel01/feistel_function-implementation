@@ -1,0 +1,6 @@
+This is an input file.
+From here we can do many things.
+like encryption decryption.
+This is an input file.
+From here we can do many things.
+like encryption decryption.
