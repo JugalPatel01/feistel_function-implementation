@@ -123,10 +123,10 @@ L6 = CF.xor_num(R5, feistel_str_4)
 R6 = L5
 
 # decrypted binary string
-inp_str1 = L6 + R6
+out_str1 = L6 + R6
 
 # converting decrypted binary string to the normal ascii values for original output
-decrypted_str = (binascii.unhexlify('%x' % int(inp_str1, 2))).decode()
+decrypted_str = (binascii.unhexlify('%x' % int(out_str1, 2))).decode('ascii')
 plain_out_file = open(r"output/04-plain_output.txt", "w")
 plain_out_file.write(decrypted_str)
 plain_out_file.close()

@@ -68,6 +68,7 @@ def comjfun(a,b):
     bc = complement(b)
     ac = lshift_str(ac, 5)
     bc = rshift_str(bc, 5)
+    bc = lshift_str(bc, 5)
     ac = com_and_num(ac,bc)
     bc = com_or_num(ac,bc)
     ans = bin(int(ac, 2) ^ int(bc, 2))
