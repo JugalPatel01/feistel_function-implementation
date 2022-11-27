@@ -6,7 +6,7 @@ import CryptFunction as CF
 # opening input file
 inp_file = open(r"01-input.txt", "r")
 inp_str = inp_file.read()
-# (inp_str)
+# print(inp_str)
 inp_file.close()
 
 # convert string to binary
@@ -50,14 +50,21 @@ def feistel(a, b):
     # return CF.com_xor_num(x, y)
     return CF.comjfun(a,b)
 
+def doeqlen(fei_str,R):
+    if len(fei_str) != len(R):
+        for i in range(len(R) - len(fei_str)):
+            fei_str = '0' + fei_str
+    return fei_str
 
 # generating L2 & R2 from given input (first round for feistel)
 feistel_str_1 = feistel(R1, key_1)
+feistel_str_1 = doeqlen(feistel_str_1,R1)
 R2 = CF.xor_num(feistel_str_1, L1)
 L2 = R1
 
 # generating L3 & R3 from given input (second round for feistel)
 feistel_str_2 = feistel(R2, key_2)
+feistel_str_2 = doeqlen(feistel_str_2,R2)
 R3 = CF.xor_num(feistel_str_2, L2)
 L3 = R2
 
@@ -66,6 +73,7 @@ binary_str = L3 + R3
 # print(len(L3))
 # print(len(R3))
 normal_str = ''
+# normal_str = (binascii.unhexlify('%x' % int(binary_str, 2))).decode('ascii')
 
 # whole encrypted string in ascii characters
 for i in range(0, len(binary_str), 7):
@@ -114,11 +122,13 @@ R3_from_file = binary_str_from_file[L3_size::]
 L4 = L3_from_file
 R4 = R3_from_file
 feistel_str_3 = feistel(L4, key_4)
+feistel_str_3 = doeqlen(feistel_str_3,L4)
 L5 = CF.xor_num(R4, feistel_str_3)
 R5 = L4
 
 # second round for the decryption
 feistel_str_4 = feistel(L5, key_3)
+feistel_str_4 = doeqlen(feistel_str_4,L5)
 L6 = CF.xor_num(R5, feistel_str_4)
 R6 = L5
 

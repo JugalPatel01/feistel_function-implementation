@@ -14,8 +14,13 @@ def multiply(a, b):
 
 
 def xor_num(a, b):
-    ans = bin(int(a, 2) ^ int(b, 2))
-    return ans[2:]
+    temp = ""
+    for i in range(len(a)):
+        if (a[i] == b[i]):
+            temp += "0"
+        else:
+            temp += "1"
+    return temp
 
 
 def complement(a):
@@ -63,13 +68,14 @@ def com_or_num(a, b):
     ans = bin(int(ac, 2) | int(bc, 2))
     return ans[2:]
 
-def comjfun(a,b):
+
+def comjfun(a, b):
     ac = complement(a)
     bc = complement(b)
     ac = lshift_str(ac, 5)
     bc = rshift_str(bc, 5)
     bc = lshift_str(bc, 5)
-    ac = com_and_num(ac,bc)
-    bc = com_or_num(ac,bc)
+    ac = com_and_num(ac, bc)
+    bc = com_or_num(ac, bc)
     ans = bin(int(ac, 2) ^ int(bc, 2))
     return ans[2:]
